@@ -46,7 +46,7 @@ public class JogoDAO {
         BufferedWriter bw = new BufferedWriter(fw);
         for (int pos = 0; pos < listaDeJogos.size(); pos++) {
             Jogo aux = listaDeJogos.get(pos);
-            if (!(aux.getNomeJogo().equals(jogo.getNomeJogo()))) {
+            if (!(aux.getCodJogo().equals(jogo.getCodJogo()))) {
                 bw.write(aux.desmaterializar() + "\n");
             }
         }
@@ -54,7 +54,7 @@ public class JogoDAO {
         bw.close();
     }
 
-    public void excluir(Object jogo) throws Exception {
+    public void excluir(String codJogo) throws Exception {
         try {
             ArrayList<Jogo> listaDeJogos = this.recuperar();
             //cria o arquivo
@@ -63,7 +63,7 @@ public class JogoDAO {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int pos = 0; pos < listaDeJogos.size(); pos++) {
                 Jogo aux = listaDeJogos.get(pos);
-                if (!(aux.getNomeJogo().equals(jogo))) {
+                if (!(aux.getCodJogo().equals(codJogo))) {
                     bw.write(aux.desmaterializar() + "\n");
                 }
             }

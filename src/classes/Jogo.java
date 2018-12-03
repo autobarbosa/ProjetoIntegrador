@@ -9,17 +9,17 @@ import interfaces.TratamentoDeDados;
 
 public class Jogo implements TratamentoDeDados {
 
-    private final static int QTD_CAMPOS = 12;
+    private final static int QTD_CAMPOS = 6;
     public final static String ARQUIVOJOGOS = "jogos.csv";
 
+    private String codJogo;
     private String nomeJogo;
     private String platJogo;
     private String genJogo;
     private String valorJogo;
+    private String quantidade;
 
-    public Jogo() {
-
-    }
+    
 
     /**
      * @return the nomeJogo
@@ -84,10 +84,13 @@ public class Jogo implements TratamentoDeDados {
             throw new RuntimeException("Quantidade de campos é inválida");
         }
 
-        setNomeJogo(split[0]);
-        setPlataformaJogo(split[1]);
-        setGeneroJogo(split[2]);
-        setValorJogo(split[3]);
+        setCodJogo(split[0]);
+        setNomeJogo(split[1]);
+        setValorJogo(split[2]);
+        setPlataformaJogo(split[3]);
+        setGeneroJogo(split[4]);
+        setQuantidade(split[5]);
+        
 
     }
 
@@ -95,6 +98,9 @@ public class Jogo implements TratamentoDeDados {
     public String desmaterializar() {
         StringBuilder sbj = new StringBuilder();
 
+        sbj.append(codJogo);
+        sbj.append(DIVISOR);
+        
         sbj.append(nomeJogo);
         sbj.append(DIVISOR);
 
@@ -106,15 +112,44 @@ public class Jogo implements TratamentoDeDados {
 
         sbj.append(valorJogo);
         sbj.append(DIVISOR);
-        return toString();
+        
+        sbj.append(quantidade);
+        
+        return sbj.toString();
+        
     }
     
     public String toString() {
-        return "Nome " + this.nomeJogo + "\n"
-                + "Plataforma " + this.platJogo + "\n"
-                + "Gênero " + this.genJogo + "\n"
-                + "Preço " + this.valorJogo;
+        return this.codJogo + ";" + this.nomeJogo +";" + this.valorJogo + ";" +this.quantidade +";"+ this.platJogo + ";" + this.genJogo ;
 
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    /**
+     * @return the codJogo
+     */
+    public String getCodJogo() {
+        return codJogo;
+    }
+
+    /**
+     * @param codJogo the codJogo to set
+     */
+    public void setCodJogo(String codJogo) {
+        this.codJogo = codJogo;
     }
 
 }

@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package interfacesgraficas;
 
-/**
- *
- * @author warle
- */
+import classes.Acessorios;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import persistencia.AcessoriosDAO;
+
+
 public class CadAcessorios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadAcessorios
-     */
+   
     public CadAcessorios() {
         initComponents();
+        
     }
 
     /**
@@ -27,23 +25,48 @@ public class CadAcessorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblInfTela = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
+        txtDescAcess = new javax.swing.JTextField();
+        lblValAcess = new javax.swing.JLabel();
+        txtValAcess = new javax.swing.JTextField();
+        btnSalvAcess = new javax.swing.JToggleButton();
+        lblCodAcess = new javax.swing.JLabel();
+        txtCodAcess = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("CADASTRO DE ACESSÓRIOS");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jLabel2.setText("Descrição");
+        lblInfTela.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblInfTela.setText("CADASTRO DE ACESSÓRIOS");
 
-        jLabel3.setText("Valor unitário");
+        lblDescricao.setText("Descrição");
 
-        jToggleButton1.setText("SALVAR");
+        lblValAcess.setText("Valor unitário");
+
+        btnSalvAcess.setText("SALVAR");
+        btnSalvAcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvAcessActionPerformed(evt);
+            }
+        });
+
+        lblCodAcess.setText("Código:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,41 +76,64 @@ public class CadAcessorios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(jLabel1))
+                        .addComponent(lblInfTela))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(lblDescricao)
+                            .addComponent(lblValAcess)
+                            .addComponent(lblCodAcess))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
+                            .addComponent(txtDescAcess)
+                            .addComponent(txtValAcess, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                            .addComponent(txtCodAcess, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jToggleButton1)))
+                        .addGap(173, 173, 173)
+                        .addComponent(btnSalvAcess)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addComponent(lblInfTela)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodAcess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodAcess))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescricao)
+                    .addComponent(txtDescAcess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblValAcess)
+                    .addComponent(txtValAcess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addComponent(btnSalvAcess)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvAcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvAcessActionPerformed
+        try {
+         Acessorios acs = new Acessorios();
+        acs.setCodAcess(txtCodAcess.getText());
+        acs.setNomeAcessorio(txtDescAcess.getText());
+        acs.setValorAcess(txtValAcess.getText());
+     
+                
+            new AcessoriosDAO().salvar(acs);
+            this.dispose();
+            new ListagemAcessorios().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnSalvAcessActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,11 +171,15 @@ public class CadAcessorios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton btnSalvAcess;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCodAcess;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblInfTela;
+    private javax.swing.JLabel lblValAcess;
+    private javax.swing.JTextField txtCodAcess;
+    private javax.swing.JTextField txtDescAcess;
+    private javax.swing.JTextField txtValAcess;
     // End of variables declaration//GEN-END:variables
 }

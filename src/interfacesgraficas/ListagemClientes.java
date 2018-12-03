@@ -12,12 +12,12 @@ import javax.swing.table.DefaultTableModel;
 import persistencia.ClienteDAO;
 
 
-public class ClienteListagem extends javax.swing.JFrame {
+public class ListagemClientes extends javax.swing.JFrame {
 
     /**
      * Creates new form ClienteListagem
      */
-    public ClienteListagem() {
+    public ListagemClientes() {
         initComponents();
     }
 
@@ -45,6 +45,11 @@ public class ClienteListagem extends javax.swing.JFrame {
             }
         });
 
+        txtBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaActionPerformed(evt);
+            }
+        });
         txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscaKeyReleased(evt);
@@ -212,6 +217,10 @@ public class ClienteListagem extends javax.swing.JFrame {
         carregarLista(txtBusca.getText());
     }//GEN-LAST:event_txtBuscaKeyReleased
 
+    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,20 +238,21 @@ public class ClienteListagem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListagemClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListagemClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListagemClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteListagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListagemClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteListagem().setVisible(true);
+                new ListagemClientes().setVisible(true);
             }
         });
     }

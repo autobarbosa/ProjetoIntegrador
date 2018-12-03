@@ -2,35 +2,56 @@ package interfacesgraficas;
 
 import classes.Jogo;
 import java.awt.Component;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import persistencia.JogoDAO;
 
 /**
  *
  * @author warle
  */
 public class CadJogo extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadJogo
-     */
+String[] plataformas =  new String[] {"NINTENDO", "PS4", "XBOX", "PC"};
+      String[] generos = new String[] {"ESPORTES", "AÇÃO", "LUTA", "CORRIDA", "TERROR", "INFANTIL"};
     public CadJogo() {
-        initComponents();
-        this.cmbPlat.removeAllItems();
-        this.cmbPlat.addItem("");
-        this.cmbPlat.addItem("NINTENDO");
-        this.cmbPlat.addItem("PS4");
-        this.cmbPlat.addItem("XBOX");
-        this.cmbPlat.addItem("PC");
-        this.cmbGen.removeAllItems();
-        this.cmbGen.addItem("");
-        this.cmbGen.addItem("ESPORTES");
-        this.cmbGen.addItem("AÇÃO");
-        this.cmbGen.addItem("LUTA");
-        this.cmbGen.addItem("CORRIDA");
-        this.cmbGen.addItem("TERROR");
-        this.cmbGen.addItem("INFANTIL");
+        initComponents();  
+        cmbPlat.removeAllItems();
+        cmbPlat.setModel(new DefaultComboBoxModel(plataformas));
+        cmbGen.removeAllItems();
+        cmbGen.setModel(new DefaultComboBoxModel(generos));
+    }
+
+    public CadJogo(Jogo jogo) {
+        this();
+        txtCodAcess.setText(jogo.getCodJogo());
+        txtNomeJogo.setText(jogo.getNomeJogo());
+        txtValor.setText(jogo.getValorJogo());
+        txtQuantidade.setText(jogo.getQuantidade());
+        
+        
+
+//        int indPlat = 0;
+//        for(int i = 0; i<plataformas.length; i++)
+//        {
+//            if(plataformas[i].equals(jogo.getPlataformaJogo()))
+//                indPlat = i;
+//        }
+        cmbPlat.setSelectedItem(jogo.getPlataformaJogo());
+        
+        
+       
+        
+//        int indGen = 0;
+//        for(int i = 0; i<generos.length; i++)
+//        {
+//            if(generos[i].equals(jogo.getGeneroJogo()))
+//                indGen = i;
+//        }
+        
+        cmbGen.setSelectedItem(jogo.getGeneroJogo());
+
     }
 
     /**
@@ -47,17 +68,17 @@ public class CadJogo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNomeJogo = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnCadastrarJogo = new javax.swing.JButton();
+        btnSalvarJogo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmbPlat = new javax.swing.JComboBox();
         cmbGen = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblJogos = new javax.swing.JTable();
-        btnAlterarJogo = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
+        txtNomeJogo = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
+        lblCodAcess = new javax.swing.JLabel();
+        txtCodAcess = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -74,12 +95,6 @@ public class CadJogo extends javax.swing.JFrame {
 
         jLabel3.setText("Valor Unitário");
 
-        txtNomeJogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeJogoActionPerformed(evt);
-            }
-        });
-
         txtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorActionPerformed(evt);
@@ -88,45 +103,44 @@ public class CadJogo extends javax.swing.JFrame {
 
         jLabel4.setText("Genêro");
 
-        btnCadastrarJogo.setText("Cadastrar");
-        btnCadastrarJogo.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarJogo.setText("Salvar");
+        btnSalvarJogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarJogoActionPerformed(evt);
+                btnSalvarJogoActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Plataforma");
 
-        cmbPlat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbPlat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PC", "PS4", "XBOX", "NINTENDO" }));
         cmbPlat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPlatActionPerformed(evt);
             }
         });
 
-        cmbGen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbGen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AÇÃO", "LUTA", "CORRIDA", "TERROR", "INFANTIL" }));
         cmbGen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGenActionPerformed(evt);
             }
         });
 
-        tblJogos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        txtNomeJogo.setForeground(new java.awt.Color(21, 18, 12));
 
-            },
-            new String [] {
-                "Nome ", "Plataforma", "Gênero", "Preço"
-            }
-        ));
-        jScrollPane1.setViewportView(tblJogos);
+        jLabel6.setText("Quantidade");
 
-        btnAlterarJogo.setText("Alterar");
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                txtQuantidadeActionPerformed(evt);
+            }
+        });
+
+        lblCodAcess.setText("Código:");
+
+        txtCodAcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodAcessActionPerformed(evt);
             }
         });
 
@@ -137,47 +151,50 @@ public class CadJogo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeJogo, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValor))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel4)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbPlat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(cmbGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)))
-                .addContainerGap(274, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
-                .addContainerGap())
+                            .addComponent(jLabel5)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(cmbPlat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(cmbGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(144, 144, 144))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCadastrarJogo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAlterarJogo)
-                .addGap(8, 8, 8)
-                .addComponent(btnExcluir)
+                .addComponent(btnSalvarJogo)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblCodAcess)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeJogo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodAcess, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodAcess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodAcess))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNomeJogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,21 +202,21 @@ public class CadJogo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbPlat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarJogo)
-                    .addComponent(btnAlterarJogo)
-                    .addComponent(btnExcluir))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalvarJogo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbPlat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -207,18 +224,25 @@ public class CadJogo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeJogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeJogoActionPerformed
+    private void btnSalvarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarJogoActionPerformed
 
-    private void btnCadastrarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarJogoActionPerformed
-        Jogo cad = new Jogo();         
-        DefaultTableModel dtmJogos = (DefaultTableModel) tblJogos.getModel();
-        Object[] dados = {txtNomeJogo.getText(), txtValor.getText(), cmbPlat.getSelectedItem(), cmbGen.getSelectedItem()};
-        dtmJogos.addRow(dados);
-
-
-    }//GEN-LAST:event_btnCadastrarJogoActionPerformed
+        try {
+            Jogo cjg = new Jogo();
+            cjg.setCodJogo(txtCodAcess.getText());
+            cjg.setNomeJogo(txtNomeJogo.getText());
+            cjg.setValorJogo(txtValor.getText());
+            cjg.setQuantidade(txtQuantidade.getText());
+            cjg.setPlataformaJogo((String) cmbPlat.getSelectedItem());
+            cjg.setGeneroJogo((String) cmbGen.getSelectedItem());
+            
+            new JogoDAO().salvar(cjg);
+            this.dispose();
+            new ListagemJogos().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
+    }//GEN-LAST:event_btnSalvarJogoActionPerformed
 
     private void cmbPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPlatActionPerformed
 
@@ -232,20 +256,19 @@ public class CadJogo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorActionPerformed
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if (tblJogos.getSelectedRow() != -1) {
-            DefaultTableModel dtmJogos = (DefaultTableModel) tblJogos.getModel();
-            dtmJogos.removeRow(tblJogos.getSelectedRow());
-        } else{
-            JOptionPane.showMessageDialog(null,"Selecione um produto para excluir.");
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
+
+    private void txtCodAcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodAcessActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodAcessActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+    
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -277,9 +300,7 @@ public class CadJogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterarJogo;
-    private javax.swing.JButton btnCadastrarJogo;
-    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSalvarJogo;
     private javax.swing.JComboBox cmbGen;
     private javax.swing.JComboBox cmbPlat;
     private javax.swing.JCheckBox jCheckBox1;
@@ -289,9 +310,11 @@ public class CadJogo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblJogos;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblCodAcess;
+    private javax.swing.JTextField txtCodAcess;
     private javax.swing.JTextField txtNomeJogo;
+    private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

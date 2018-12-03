@@ -124,7 +124,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1CadastrarActionPerformed
 
     private void jMenuItem2CadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2CadastrarClienteActionPerformed
-new ClienteListagem().setVisible(true);
+new ListagemClientes().setVisible(true);
     }//GEN-LAST:event_jMenuItem2CadastrarClienteActionPerformed
 
     private void jMenuItem1CadastrarjogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1CadastrarjogoActionPerformed

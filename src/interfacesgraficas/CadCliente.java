@@ -5,6 +5,7 @@ package interfacesgraficas;
 import classes.Cliente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import persistencia.ClienteDAO;
 
@@ -18,6 +19,8 @@ public class CadCliente extends javax.swing.JFrame {
    
     public CadCliente() {
         initComponents();
+        cmbUf.removeAllItems();
+        cmbUf.setModel(new DefaultComboBoxModel(new String []{"", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RS", "SC", "SE", "SP", "TO"}));
     }
 
     public CadCliente(Cliente cliente) {
@@ -91,6 +94,11 @@ public class CadCliente extends javax.swing.JFrame {
         jLabel9.setText("UF");
 
         cmbUf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "Item 2", "Item 3", "Item 4" }));
+        cmbUf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUfActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Cidade");
 
@@ -249,28 +257,33 @@ public class CadCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-     Cliente cad = new Cliente();
-     cad.setNome(txtNomeCliente.getText());
-     cad.setDataNasc(txtDataNasc.getText());
-     cad.setCpf(txtCpf.getText());
+     try {
+         Cliente cad = new Cliente();
+        cad.setNome(txtNomeCliente.getText());
+        cad.setDataNasc(txtDataNasc.getText());
+        cad.setCpf(txtCpf.getText());
      
-     cad.setEndereco(txtEndereco.getText());
-     cad.setBairro(txtBairro.getText());
-     cad.setCidade(txtCidade.getText());
-     cad.setUf(cmbUf.getSelectedItem().toString());
+        cad.setEndereco(txtEndereco.getText());
+        cad.setBairro(txtBairro.getText());
+        cad.setCidade(txtCidade.getText());
+        cad.setUf(cmbUf.getSelectedItem().toString());
      
-     cad.setTelefone1(txtTelefone1.getText());
-     cad.setTelefone2(txtTelefone2.getText());
-     cad.setEmail(txtEmail.getText());
+        cad.setTelefone1(txtTelefone1.getText());
+        cad.setTelefone2(txtTelefone2.getText());
+        cad.setEmail(txtEmail.getText());
 
-        try {
+        
             new ClienteDAO().salvar(cad);
             this.dispose();
-            new ClienteListagem().setVisible(true);
+            new ListagemClientes().setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void cmbUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUfActionPerformed
 
     /**
      * @param args the command line arguments
